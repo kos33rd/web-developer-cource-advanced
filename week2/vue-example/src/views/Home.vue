@@ -22,6 +22,8 @@
 </style>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'home',
   components: {
@@ -39,8 +41,12 @@ export default {
   },
   methods: {
     onSearchClick() {
+      this.addSearchRecord(this.input);
       this.$router.push({ name: 'search', query: { query: this.input } });
     },
+    ...mapActions({
+      addSearchRecord: 'addSearchRecord',
+    }),
   },
 };
 </script>

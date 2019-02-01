@@ -7,13 +7,22 @@
           <person :data="result"/>
         </el-col>
       </el-row>
+    <br/>
+    <h3>Previous requests:</h3>
+    <ul>
+      <li v-for="search in searches" :key="search">
+        <router-link :to="{path: '/search', query: {query: search}}">{{search}}</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 import Person from '../components/Person.vue';
+
 
 export default {
   name: 'results',
@@ -26,6 +35,10 @@ export default {
       query,
       results: [],
     };
+  },
+
+  computed: {
+    ...mapGetters(['searches']),
   },
 
   created() {
